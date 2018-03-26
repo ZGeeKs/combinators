@@ -1,0 +1,54 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+
+defaults: &defaults
+  working_directory: ~/zgeeks/combinators
+  docker:
+    - image: circleci/openjdk:8-jdk
+
+  environment:
+    JVM_OPTS: -Xmx3200m
+    MAVEN_OPTS: -Xmx3200m
+    TERM: dumb
+
+version: 2
+jobs:
+  prepare:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - maven-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - maven-dependencies-
+      - run: mvn dependency:go-offline 
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: maven-dependencies-{{ checksum "pom.xml" }}
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - maven-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - maven-dependencies-
+      - run: mvn test
+      - store_test_results:
+           path: target/surefire-reports
+  
+workflows:
+  version: 2
+  prepare_test:
+    jobs:
+      - prepare
+      - test:
+          requires:
+            - prepare
