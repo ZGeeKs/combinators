@@ -4,29 +4,39 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.zgeeks.combinators.Predicates.equalTo;
 import static io.zgeeks.combinators.Predicates.or;
+import static java.util.stream.Collectors.toList;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 public class PredicatesTest {
 
     @Test
-    public void testAnd() {
-
-        List<Data> list = Stream.of(new Data("toto1", 1, false),
+    public void testOr() {
+        List<Data> list = Stream
+            .of(
+                new Data("toto1", 1, false),
                 new Data("toto2", 2, true),
-                new Data("toto3", 3, true))
-                .filter(or(equalTo(Data::getKey, 2),
-                        equalTo(Data::getKey, 3)))
-                .collect(Collectors.toList());
+                new Data("toto3", 3, true)
+            )
+            .filter(
+                or(
+                    equalTo(Data::getKey, 2),
+                    equalTo(Data::getKey, 3)
+                )
+            )
+            .collect(toList());
 
-        assertEquals(asList(new Data("toto2", 2, true),
-                new Data("toto3", 3, true)), list);
-
+        assertEquals(
+            asList(
+                new Data("toto2", 2, true),
+                new Data("toto3", 3, true)
+            ),
+            list
+        );
     }
 
     private final class Data {
