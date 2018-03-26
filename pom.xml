@@ -17,6 +17,44 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/ZGeeKs/combinators/issues</url>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Zakaria Benjebara</name>
+            <email>benjebarazakaria@gmail.com</email>
+            <organization>ZGeeKs</organization>
+            <organizationUrl>https://github.com/ZGeeKs</organizationUrl>
+            <roles>
+                <role>owner</role>
+                <role>developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/ZGeeKs/combinators.git</connection>
+        <developerConnection>scm:git:ssh://github.com:ZGeeKs/combinators.git</developerConnection>
+        <url>https://github.com/ZGeeKs/combinators/tree/master</url>
+    </scm>
+
+    <ciManagement>
+        <system>Circle CI</system>
+        <url>https://circleci.com/gh/ZGeeKs/combinators</url>
+    </ciManagement>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -24,6 +62,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.7.19</version>
+            <scope>test</scope>
+      </dependency>
     </dependencies>
 
     <build>
@@ -31,16 +75,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
+                <version>2.21.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.7.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
             </plugin>
         </plugins>
     </build>
