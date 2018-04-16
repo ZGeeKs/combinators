@@ -1,4 +1,4 @@
-package io.zgeeks.combinators;
+package com.github.zgeeks.combinators;
 
 import org.junit.Test;
 
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static io.zgeeks.combinators.Predicates.equalTo;
-import static io.zgeeks.combinators.Predicates.or;
+import static com.github.zgeeks.combinators.Predicates.equalTo;
+import static com.github.zgeeks.combinators.Predicates.or;
 import static java.util.stream.Collectors.toList;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
@@ -60,22 +60,6 @@ public class PredicatesTest {
 
         public boolean isDump() {
             return dump;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Data data = (Data) o;
-            return key == data.key &&
-                    dump == data.dump &&
-                    Objects.equals(toto, data.toto);
-        }
-
-        @Override
-        public int hashCode() {
-
-            return Objects.hash(toto, key, dump);
         }
     }
 }
