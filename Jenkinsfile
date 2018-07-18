@@ -17,7 +17,7 @@ node {
     }
 
     stage('Compile + Tests') {
-        maven.run pom: 'pom.xml', goals: 'clean install'
+        maven.run goals: 'clean install'
     }
 
     stage 'Post-build actions'
