@@ -3,5 +3,5 @@ node {
 
     checkout scm
 
-    stage 'Post-build actions'
+    stage 'Post-build actions '
 }
